@@ -1,4 +1,45 @@
 .app {
-  text-align: center;
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto';
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.app__content {
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+  background-color: lightgray;
+  background-image: url(../../assets/georgia-de-lotz--UsJoNxLaNo-unsplash.png);
+  background-size: cover;
+}
+
+.app__content_signedin {
+  background-image: none;
+  background-color: #ffffff;
+  color: #1a1b22;
+}
+
+@media screen and (min-width: 321px) and (max-width: 768px) {
+  .app__content {
+    height: 400px;
+    background-image: url(../../assets/georgia-de-lotz--UsJoNxLaNo-unsplash_tablet.png);
+  }
+
+  .app__content_signedin {
+    background-image: none;
+    background-color: #ffffff;
+    color: #1a1b22;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .app__content {
+    background-image: url(../../assets/georgia-de-lotz--UsJoNxLaNo-unsplash_mobile.png);
+  }
+
+  .app__content_signedin {
+    background-image: none;
+    background-color: #ffffff;
+    color: #1a1b22;
+  }
 }

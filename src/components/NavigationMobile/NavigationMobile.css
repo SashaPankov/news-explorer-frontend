@@ -1,0 +1,84 @@
+.navigationm {
+  display: flex;
+  font-size: 18px;
+  font-family: 'Roboto 500';
+  line-height: 24px;
+  background-color: transparent;
+  gap: 42px;
+  align-items: center;
+  justify-content: end;
+  height: inherit;
+  align-self: flex-end;
+}
+
+.navigationm__menu {
+  width: 24px;
+  height: 24px;
+  border: transparent;
+  background-color: transparent;
+  margin-right: 16px;
+}
+
+.navigationm__menu {
+  width: 24px;
+  height: 24px;
+  border: transparent;
+  background-color: transparent;
+  margin-right: 16px;
+}
+
+.navigationm_signedin {
+  color: #1a1b22;
+}
+
+.navigationm__button {
+  border-style: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: #ffffff;
+  border-bottom: 1px solid transparent;
+}
+
+.navigationm__button_signed {
+  color: #1a1b22;
+}
+
+.navigationm__button_active {
+  border-bottom: 1px solid #ffffff;
+}
+
+.navigationm__button_signed_active {
+  color: #1a1b22;
+  border-bottom: 1px solid #1a1b22;
+}
+
+.navigationm__button-signin {
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  width: 176px;
+  height: 48px;
+  border: 1px solid #ffffff;
+  align-self: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 15px;
+}
+
+.navigationm__button-signin_signedin {
+  border: 1px solid #1a1b22;
+  color: #1a1b22;
+  background-color: transparent;
+  width: auto;
+  padding-left: 20px;
+  padding-right: 10px;
+}
+
+.navigationm__menu-icon {
+  width: 24px;
+  height: 24px;
+  border: transparent;
+}

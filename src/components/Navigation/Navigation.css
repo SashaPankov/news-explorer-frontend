@@ -1,0 +1,73 @@
+.navigation {
+  margin-left: auto;
+  display: flex;
+  font-size: 18px;
+  font-family: 'Roboto 500';
+  line-height: 24px;
+  background-color: transparent;
+  gap: 42px;
+  margin-right: 104px;
+  height: inherit;
+}
+
+.navigation_signedin {
+  color: #1a1b22;
+}
+
+.navigation__button {
+  border-style: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: #ffffff;
+  border-bottom: 1px solid transparent;
+}
+
+.navigation__button_signed {
+  color: #1a1b22;
+}
+
+.navigation__button_active {
+  border-bottom: 1px solid #ffffff;
+}
+
+.navigation__button_signed_active {
+  color: #1a1b22;
+  border-bottom: 1px solid #1a1b22;
+}
+
+.navigation__button-signin {
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  width: 176px;
+  height: 48px;
+  border: 1px solid #ffffff;
+  align-self: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 15px;
+}
+
+.navigation__button-signin_signedin {
+  border: 1px solid #1a1b22;
+  color: #1a1b22;
+  background-color: transparent;
+  width: auto;
+  padding-left: 20px;
+  padding-right: 10px;
+}
+
+.navigation__signout {
+  width: 24px;
+  height: 24px;
+  border: transparent;
+}
+
+@media screen and (min-width: 321px) and (max-width: 768px) {
+}
+
+@media screen and (max-width: 320px) {
+}

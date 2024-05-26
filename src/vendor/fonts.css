@@ -1,17 +1,52 @@
 @font-face {
   font-family: 'Roboto';
-  src: url('./fonts/Roboto-Regular.woff2') format('woff2'),
-    url('./fonts/Roboto-Regular.woff') format('woff');
+  src: url('./fonts/roboto-400-regular.woff2') format('woff2'),
+    url('./fonts/roboto-400-regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto 500';
+  src: url('./fonts/roboto-500.woff2') format('woff2'),
+    url('./fonts/roboto-500.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto 700';
+  src: url('./fonts/roboto-700.woff2') format('woff2'),
+    url('./fonts/roboto-700.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto 900';
+  src: url('./fonts/roboto-900.woff2') format('woff2'),
+    url('./fonts/roboto-900.woff') format('woff');
+  font-weight: 900;
 }
 
 @font-face {
   font-family: 'Roboto Slab';
-  src: url('./fonts/RobotoSlab-Regular.woff2') format('woff2'),
-    url('./fonts/RobotoSlab-Regular.woff') format('woff');
+  src: url('./fonts/roboto-slab-400-regular.woff2') format('woff2'),
+    url('./fonts/roboto-slab-400-regular.woff') format('woff');
+  font-weight: 400;
 }
 
 @font-face {
-  font-family: 'Source Sans Pro';
-  src: url('./fonts/SourceSansPro.woff2') format('woff2'),
-    url('./fonts/SourceSansPro.woff') format('woff');
+  font-family: 'Roboto Slab 700';
+  src: url('./fonts/roboto-slab-700.woff2') format('woff2'),
+    url('./fonts/roboto-slab-700.woff') format('woff');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/inter-400-regular.woff2') format('woff2'),
+    url('./fonts/inter-400-regular.woff') format('woff');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Inter 500';
+  src: url('./fonts/inter-500-regular.woff2') format('woff2'),
+    url('./fonts/inter-500-regular.woff') format('woff');
+  font-weight: 500;
 }

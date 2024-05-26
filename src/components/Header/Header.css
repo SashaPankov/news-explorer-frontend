@@ -1,11 +1,49 @@
 .header {
   display: flex;
-  justify-content: center;
   align-items: center;
   padding: 15px;
+  color: #ffffff;
+  padding: 0;
+  height: 80px;
+  border-bottom: 1px solid #d1d2d6;
+}
+
+.header_signedin {
+  color: #1a1b22;
+}
+
+.header_mobile {
+  justify-content: space-between;
+}
+
+.header_mobile_expanded {
+  background: #1a1b22;
 }
 
 .header__title {
-  font-size: 40px;
-  margin-left: 12px;
+  font-size: 20px;
+  margin-left: 104px;
+  line-height: 24px;
+  font-family: 'Roboto Slab 700';
+}
+
+@media screen and (min-width: 321px) and (max-width: 768px) {
+  .header {
+    height: 66px;
+  }
+
+  .header__title {
+    margin-left: 40px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header {
+    height: 56px;
+  }
+
+  .header__title {
+    margin-left: 16px;
+    font-size: 16px;
+  }
 }

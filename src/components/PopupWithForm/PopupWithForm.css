@@ -1,0 +1,111 @@
+.popup__title {
+  padding-top: 6px;
+  margin: 0;
+  font-family: 'Roboto 900';
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.popup__title_mobile {
+  padding-top: 6px;
+  margin: 0;
+  font-family: 'Roboto 900';
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.popup__form {
+  display: flex;
+  flex-direction: column;
+  color: #000;
+  font-family: Cabinet Grotesk;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+  border-radius: 16px;
+}
+
+.popup__label {
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  color: #2f71e5;
+  font-family: 'Inter';
+  font-size: 12px;
+}
+
+.popup__input {
+  font-family: 'Inter';
+  font-size: 14px;
+  border-style: none;
+  outline: none;
+  border-bottom: 1px solid #000000;
+}
+
+.popup__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.popup__button-submit {
+  margin-top: 40px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  color: #fff;
+  font-family: 'Roboto 500';
+  font-size: 18px;
+  line-height: 24px;
+  cursor: pointer;
+  background: #2f71e5;
+  width: 360px;
+  height: 64px;
+  border-radius: 40px;
+  border-style: none;
+}
+
+.popup__button-submit_mobile {
+  width: 288px;
+}
+
+.popup__button-submit_disabled {
+  background: #e6e8eb;
+  color: #b6bcbf;
+}
+
+.popup__button-action {
+  padding: 0;
+  border-style: none;
+  border-radius: none;
+  background: none;
+  color: #000;
+  font-family: 'Inter';
+  font-size: 14px;
+  line-height: 16px;
+  cursor: pointer;
+}
+
+.popup__altaction {
+  color: #2f71e5;
+}
+
+.popup__button-action_visible {
+  visibility: visible;
+}
+
+.popup__button-action_hidden {
+  visibility: hidden;
+}
+
+.popup__error {
+  color: #ff0000;
+  line-height: 14px;
+  width: 360px;
+  height: 2em;
+}
+
+.popup__error_mobile {
+  width: 288px;
+}

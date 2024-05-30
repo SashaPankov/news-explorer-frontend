@@ -13,7 +13,7 @@
   background-size: cover;
 }
 
-.app__content_signedin {
+.app__content_signed_in {
   background-image: none;
   background-color: #ffffff;
   color: #1a1b22;
@@ -21,11 +21,10 @@
 
 @media screen and (min-width: 321px) and (max-width: 768px) {
   .app__content {
-    height: 400px;
     background-image: url(../../assets/georgia-de-lotz--UsJoNxLaNo-unsplash_tablet.png);
   }
 
-  .app__content_signedin {
+  .app__content_signed_in {
     background-image: none;
     background-color: #ffffff;
     color: #1a1b22;
@@ -37,7 +36,7 @@
     background-image: url(../../assets/georgia-de-lotz--UsJoNxLaNo-unsplash_mobile.png);
   }
 
-  .app__content_signedin {
+  .app__content_signed_in {
     background-image: none;
     background-color: #ffffff;
     color: #1a1b22;

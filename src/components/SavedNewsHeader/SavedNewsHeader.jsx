@@ -6,8 +6,8 @@ function SavedNewsHeader({ savedArticlesCount }) {
   const currentUser = useContext(CurrentUserContext);
 
   return (
-    <div className='savednewsheader'>
-      <p className='savednewsheader__title'>Saved articles</p>
+    <section className='savednewsheader'>
+      <h2 className='savednewsheader__title'>Saved articles</h2>
       <p className='savednewsheader__info'>
         {currentUser?.userName}, you have {savedArticlesCount} saved articles
       </p>
@@ -17,7 +17,7 @@ function SavedNewsHeader({ savedArticlesCount }) {
           Nature, Yellowstone, and 2 other
         </span>
       </p>
-    </div>
+    </section>
   );
 }
 

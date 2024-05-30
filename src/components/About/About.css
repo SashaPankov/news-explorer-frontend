@@ -1,14 +1,24 @@
 .about {
   display: flex;
-  gap: 56px;
   margin: 0;
-  padding-top: 80px;
+  --width_vsb: calc(100vw - 100%);
+  --padright: calc(15vw - (var(--width_vsb)));
+  padding: 80px var(--padright) 61px 7.2222vw;
+  justify-content: space-between;
+}
+
+.about__imagewrapper {
+  width: 32.2222vw;
+}
+
+.about__card {
+  width: 41.6667vw;
 }
 
 .about__image {
-  margin-left: 104px;
-  width: 464px;
-  height: 464px;
+  width: 100%;
+  aspect-ratio: 1/1;
+  display: block;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -19,7 +29,8 @@
   font-weight: 400;
   line-height: 46px;
   text-align: left;
-  margin-top: 0;
+  padding-top: 50px;
+  margin: 0;
 }
 
 .about__description {
@@ -28,8 +39,9 @@
   font-weight: 400;
   line-height: 24px;
   text-align: left;
-  width: 603px;
+  width: auto;
   opacity: 1;
+  margin-top: 24px;
 }
 
 .about__reactLogo {
@@ -45,26 +57,29 @@
 
 @media screen and (min-width: 321px) and (max-width: 768px) {
   .about {
-    gap: 32px;
-    padding: 40px 40px 0;
+    margin: 0;
+    --width_vsb: calc(100vw - 100%);
+    --padright: calc(5.2083vw - (var(--width_vsb)));
+    padding: 40px var(--padright) 61px 5.2083vw;
+  }
+
+  .about__imagewrapper {
+    width: 30.2083vw;
   }
 
   .about__image {
-    width: 232px;
-    height: 232px;
-    margin: 20px 0 0;
+    margin: 21px 0 0;
+  }
+
+  .about__card {
+    width: 55.2083vw;
   }
 
   .about__title {
     font-size: 30px;
-    height: 34px;
     line-height: 40px;
-    width: 424px;
     margin: 0 auto 16px;
-  }
-
-  .about__description {
-    width: 424px;
+    padding-top: 0;
   }
 }
 
@@ -72,28 +87,33 @@
   .about {
     flex-direction: column;
     align-items: center;
-    padding: 32px 0 130px;
+    padding: 32px 0 128px;
     gap: 24px;
+  }
+
+  .about__imagewrapper {
+    width: 85vw;
   }
 
   .about__image {
     width: 272px;
     height: 272px;
     margin: 0;
-    padding: 0 24px;
   }
 
   .about__card {
     display: flex;
     flex-direction: column;
     padding: 0 16px;
+    width: auto;
+    gap: 16px;
   }
 
   .about__title {
     font-size: 30px;
     line-height: 40px;
     width: 288px;
-    margin-bottom: 16px;
+    padding: 0;
   }
 
   .about__description {

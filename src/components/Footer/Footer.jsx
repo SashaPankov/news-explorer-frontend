@@ -8,7 +8,7 @@ const navClassName = ({ isActive }) =>
 
 function Footer({ isMobile = false }) {
   return (
-    <div className='footer'>
+    <footer className='footer'>
       {!isMobile && (
         <p className='footer__copyright'>
           © Sasha Pankov, Powered by{' '}
@@ -66,7 +66,7 @@ function Footer({ isMobile = false }) {
           </a>
         </p>
       )}
-    </div>
+    </footer>
   );
 }
 

@@ -1,17 +1,20 @@
 .navigation {
-  margin-left: auto;
   display: flex;
   font-size: 18px;
   font-family: 'Roboto 500';
   line-height: 24px;
   background-color: transparent;
-  gap: 42px;
-  margin-right: 104px;
+  gap: 2.9167vw;
   height: inherit;
+  justify-content: space-around;
 }
 
-.navigation_signedin {
+.navigation_nothome {
   color: #1a1b22;
+}
+
+.navigation__buttonswrapper {
+  display: flex;
 }
 
 .navigation__button {
@@ -22,7 +25,7 @@
   border-bottom: 1px solid transparent;
 }
 
-.navigation__button_signed {
+.navigation__button_nothome {
   color: #1a1b22;
 }
 
@@ -30,8 +33,7 @@
   border-bottom: 1px solid #ffffff;
 }
 
-.navigation__button_signed_active {
-  color: #1a1b22;
+.navigation__button_nothome_active {
   border-bottom: 1px solid #1a1b22;
 }
 
@@ -40,7 +42,7 @@
   border-bottom-right-radius: 40px;
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;
-  width: 176px;
+  width: 12.2222vw;
   height: 48px;
   border: 1px solid #ffffff;
   align-self: center;
@@ -49,15 +51,19 @@
   align-items: center;
   justify-content: space-evenly;
   gap: 15px;
+  padding: 12px 12px;
 }
 
-.navigation__button-signin_signedin {
-  border: 1px solid #1a1b22;
+.navigation__button-signin_nothome {
   color: #1a1b22;
+  border: 1px solid #1a1b22;
   background-color: transparent;
-  width: auto;
+}
+
+.navigation__button-signin_signed_in {
   padding-left: 20px;
   padding-right: 10px;
+  width: auto;
 }
 
 .navigation__signout {
@@ -66,7 +72,59 @@
   border: transparent;
 }
 
+.navigation__username {
+  width: auto;
+  text-wrap: nowrap;
+}
+
+.navigation__username_signed_in {
+  width: auto;
+}
+
 @media screen and (min-width: 321px) and (max-width: 768px) {
+  .navigation {
+    gap: 2.1vw;
+    font-size: 16px;
+  }
+
+  .navigation__buttonswrapper {
+    gap: 2.1vw;
+  }
+
+  .navigation__button-signin {
+    padding: 8px 12px;
+    height: 40px;
+    width: auto;
+  }
+
+  .navigation__button-signin_signed_in {
+    padding-left: 15px;
+    padding-right: 13px;
+  }
+
+  .navigation__username {
+    width: 16.7vw;
+  }
+
+  .navigation__username_signed_in {
+    width: auto;
+  }
+}
+
+@media screen and (max-width: 373px) {
+  .navigation__buttonswrapper {
+    flex-direction: column;
+    justify-content: end;
+    gap: unset;
+  }
+
+  .navigation__buttonswrapper_signed_in {
+    justify-content: space-between;
+  }
+
+  .navigation__button_notsigned {
+    height: 100%;
+  }
 }
 
 @media screen and (max-width: 320px) {

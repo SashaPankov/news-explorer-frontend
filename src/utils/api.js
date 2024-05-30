@@ -4,7 +4,6 @@ const backEndUrl =
   process.env.NODE_ENV === 'production'
     ? 'https://api.wtwr7206.twilightparadox.com'
     : 'http://localhost:3001';
-const reqHeaders = { 'Content-Type': 'application/json' };
 
 const sendRequest = async (root, options, baseUrl = backEndUrl) => {
   return fetch(`${baseUrl}${root}`, options).then((res) => {
@@ -22,13 +21,6 @@ const getNewsByKeyword = (keyword) => {
     {},
     `${newsApiURL}/everything?q=${keyword}&apiKey=${apiKey}`
   );
-};
-
-const getClothingItems = () => {
-  return sendRequest('/items', {
-    method: 'GET',
-    headers: reqHeaders,
-  });
 };
 
 export { sendRequest, getNewsByKeyword };

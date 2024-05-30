@@ -1,12 +1,12 @@
-import { useEffect, useRef, useContext } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import './Search.css';
 
 function Search({ isMobile = false, onTopicSearch, searchTopic }) {
   const inputRef = useRef(null);
 
-  const handleTopicEntered = () => {
+  const handleTopicEntered = useCallback(() => {
     onTopicSearch(inputRef.current.value);
-  };
+  }, [onTopicSearch]);
 
   useEffect(() => {
     const handleEnter = (e) => {
@@ -20,8 +20,8 @@ function Search({ isMobile = false, onTopicSearch, searchTopic }) {
   }, [handleTopicEntered]);
 
   return (
-    <div className='search'>
-      <p className='search__title'>What's going on in the world?</p>
+    <section className='search'>
+      <h2 className='search__title'>What&apos;s going on in the world?</h2>
       <p className='search__description'>
         Find the latest news on any topic and save them in your personal
         account.
@@ -46,7 +46,7 @@ function Search({ isMobile = false, onTopicSearch, searchTopic }) {
           Search
         </button>
       )}
-    </div>
+    </section>
   );
 }
 

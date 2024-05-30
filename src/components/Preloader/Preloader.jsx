@@ -1,6 +1,6 @@
 import './Preloader.css';
 
-function Preloader({}) {
+function Preloader() {
   return <div className='circle-preloader'></div>;
 }
 

@@ -10,12 +10,11 @@ const SignInPopup = ({
   onChangeToSignUp,
   onChangeToSignIn,
   actionText,
-  user,
   isSignUp = false,
   isMobile = false,
 }) => {
   const inputCount = isSignUp ? 3 : 2;
-  const { values, setValues, validities, handleChange } = useForm({});
+  const { values, validities, handleChange } = useForm({});
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
@@ -28,11 +27,11 @@ const SignInPopup = ({
           return !validity.valid;
         })
     );
-  }, [validities]);
+  }, [validities, inputCount]);
 
   function handleSubmit(e) {
     e.preventDefault();
-    !isSignUp ? onUserSignin(values) : onUserSignup(values);
+    !isSignUp ? onUserSignin(values) : onUserSignup();
   }
 
   function handleSignUp() {
@@ -42,10 +41,6 @@ const SignInPopup = ({
   function handleSignIn() {
     onChangeToSignIn();
   }
-
-  const getErrorClassName = () => {
-    return !isMobile ? 'popup__error' : 'popup__error popup__error_mobile';
-  };
 
   return (
     <PopupWithForm
@@ -73,9 +68,10 @@ const SignInPopup = ({
           onChange={handleChange}
           ref={emailInputRef}
         />
-        <span className={getErrorClassName()} id='user-email-error'>
+        <span className='popup__error' id='user-email-error'>
           {!validities['email']?.valid &&
-            emailInputRef.current?.validationMessage}
+            emailInputRef.current &&
+            'Invalid email address'}
         </span>
       </label>
       <label className='popup__label'>
@@ -91,7 +87,7 @@ const SignInPopup = ({
           onChange={handleChange}
           ref={passwordInputRef}
         />
-        <span className={getErrorClassName()} id='user-password-error'>
+        <span className='popup__error' id='user-password-error'>
           {validities['password'] &&
             !validities['password']?.valid &&
             passwordInputRef.current?.validationMessage}
@@ -111,7 +107,7 @@ const SignInPopup = ({
             onChange={handleChange}
             ref={userNameInputRef}
           />
-          <span className={getErrorClassName()} id='user-password-error'>
+          <span className='popup__error' id='user-password-error'>
             {validities['userName'] &&
               !validities['userName']?.valid &&
               userNameInputRef.current?.validationMessage}

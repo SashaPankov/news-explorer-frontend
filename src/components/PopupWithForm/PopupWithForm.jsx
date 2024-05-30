@@ -16,7 +16,6 @@ const PopupWithForm = ({
   onDoSomeAction,
   buttonTextOnSubmit = 'Saving...',
   isSubmitDisabled = true,
-  isMobile = false,
 }) => {
   const { isLoading } = useContext(ServerRequestContext);
 
@@ -27,27 +26,15 @@ const PopupWithForm = ({
   }`;
 
   const buttonClassName = isSubmitDisabled
-    ? !isMobile
-      ? 'popup__button-submit popup__button-submit_disabled'
-      : 'popup__button-submit popup__button-submit_mobile popup__button-submit_disabled'
-    : !isMobile
-    ? 'popup__button-submit'
-    : 'popup__button-submit popup__button-submit_mobile';
+    ? 'popup__button-submit popup__button-submit_disabled'
+    : 'popup__button-submit';
 
   return (
-    <Popup name={name} onClose={onClose} isMobile={isMobile}>
-      <h2 className={!isMobile ? 'popup__title' : 'popup__title_mobile'}>
-        {title}
-      </h2>
+    <Popup name={name} onClose={onClose}>
+      <h2 className='popup__title'>{title}</h2>
       <form className='popup__form' onSubmit={onSubmit}>
         {children}
-        <div
-          className={
-            !isMobile
-              ? 'popup__actions'
-              : 'popup__actions popup__actions_mobile'
-          }
-        >
+        <div className='popup__actions'>
           <button
             type='submit'
             className={buttonClassName}

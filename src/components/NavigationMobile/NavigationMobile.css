@@ -11,24 +11,16 @@
   align-self: flex-end;
 }
 
-.navigationm__menu {
-  width: 24px;
-  height: 24px;
-  border: transparent;
-  background-color: transparent;
-  margin-right: 16px;
-}
-
-.navigationm__menu {
-  width: 24px;
-  height: 24px;
-  border: transparent;
-  background-color: transparent;
-  margin-right: 16px;
-}
-
-.navigationm_signedin {
+.navigationm_nothome {
   color: #1a1b22;
+}
+
+.navigationm__menu {
+  width: 24px;
+  height: 24px;
+  border: transparent;
+  background-color: transparent;
+  padding: 0;
 }
 
 .navigationm__button {
@@ -68,7 +60,7 @@
   gap: 15px;
 }
 
-.navigationm__button-signin_signedin {
+.navigationm__button-signin_signed_in {
   border: 1px solid #1a1b22;
   color: #1a1b22;
   background-color: transparent;

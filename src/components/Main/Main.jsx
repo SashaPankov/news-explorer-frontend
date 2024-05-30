@@ -14,7 +14,7 @@ function Main({
   savedArticlesCount,
 }) {
   return (
-    <div className='main'>
+    <main className='main'>
       <Routes>
         <Route path='*' element={<PageNotFound />} />
 
@@ -44,7 +44,7 @@ function Main({
           }
         />
       </Routes>
-    </div>
+    </main>
   );
 }
 

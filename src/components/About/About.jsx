@@ -4,10 +4,12 @@ import reactLogo from '../../assets/react.svg';
 
 function About() {
   return (
-    <div className='about'>
-      <img className='about__image' src={avatar} alt='Author photo' />
+    <section className='about'>
+      <div className='about__imagewrapper'>
+        <img className='about__image' src={avatar} alt='Author photo' />
+      </div>
       <div className='about__card'>
-        <p className='about__title'>About the site and the author</p>
+        <h2 className='about__title'>About the site and the author</h2>
         <p className='about__description'>
           This news explorer created by Sasha Pankov as his diploma project at{' '}
           <a
@@ -36,7 +38,7 @@ function About() {
           </a>
         </p>
       </div>
-    </div>
+    </section>
   );
 }
 

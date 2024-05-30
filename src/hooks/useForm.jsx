@@ -6,7 +6,7 @@ export function useForm(inputValues) {
 
   const handleChange = (e) => {
     const { value, name, validity } = e.target;
-    setValues((v) => ({ ...values, [name]: value }));
+    setValues(() => ({ ...values, [name]: value }));
     setValidities((validities) => ({ ...validities, [name]: validity }));
   };
 

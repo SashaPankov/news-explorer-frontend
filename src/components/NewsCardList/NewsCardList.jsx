@@ -22,7 +22,7 @@ function NewsCardList({
   };
 
   return (
-    <div className='news'>
+    <section className='news'>
       {!isSavedNews && <p className='news__caption'>Search results</p>}
       <ul className='news__cards'>
         {visibleArticles.map((card, key) => (
@@ -32,6 +32,7 @@ function NewsCardList({
             onChangeSavedArticles={onChangeSavedArticles}
             isCardSaved={savedArticles.indexOf(card) !== -1}
             isSavedView={theNews === savedArticles}
+            isSavedNews={isSavedNews}
           />
         ))}
       </ul>
@@ -40,7 +41,7 @@ function NewsCardList({
           Show more
         </button>
       )}
-    </div>
+    </section>
   );
 }
 

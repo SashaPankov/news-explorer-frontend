@@ -16,8 +16,11 @@ import Preloader from '../Preloader/Preloader.jsx';
 function App() {
   const location = useLocation();
   const isMobile = useMediaQuery('only screen and (max-width: 320px)');
-  const isTablet = useMediaQuery(
-    'only screen and (min-width: 321px) and (max-width: 768px)'
+  const isTabletSuperNarrow = useMediaQuery(
+    'only screen and (min-width: 321px) and (max-width: 470px)'
+  );
+  const isTabletNarrow = useMediaQuery(
+    'only screen and (min-width: 471px) and (max-width: 767px)'
   );
   const isSuperNarrow = useMediaQuery(
     'only screen and (min-width: 769px) and (max-width: 830px)'
@@ -26,8 +29,13 @@ function App() {
     'only screen and (min-width: 831px) and (max-width: 1246px)'
   );
 
-  const newsInARow = isMobile || isSuperNarrow ? 1 : isNarrow ? 2 : 3;
-  const moreNewsDelta = isNarrow ? 2 : 3;
+  const newsInARow =
+    isMobile || isSuperNarrow || isTabletSuperNarrow
+      ? 1
+      : isNarrow || isTabletNarrow
+      ? 2
+      : 3;
+  const moreNewsDelta = isNarrow || isTabletNarrow ? 2 : 3;
 
   const [newsSection, setNewsSection] = useState({ visible: false, topic: '' });
   const [visibleNews, setvisibleNews] = useState(isNarrow ? 2 : 3);
@@ -79,7 +87,7 @@ function App() {
   };
 
   const handleUserSignin = (userSigninData) => {
-    if (!userSigninData.hasOwnProperty('userName')) {
+    if (!Object.prototype.hasOwnProperty.call(userSigninData, 'userName')) {
       userSigninData['userName'] = 'Elise';
     }
     setCurrentUser(userSigninData);
@@ -88,7 +96,7 @@ function App() {
     ref.current.setState();
   };
 
-  const handleUserSignup = (userCredentials) => {
+  const handleUserSignup = () => {
     handleClosePopup();
     handleSignInClick();
   };
@@ -128,7 +136,9 @@ function App() {
       <div className='app'>
         <div
           className={
-            signedIn ? 'app__content app__content_signedin' : 'app__content'
+            location.pathname !== '/'
+              ? 'app__content app__content_signed_in'
+              : 'app__content'
           }
         >
           <Header
@@ -137,6 +147,8 @@ function App() {
             handleSignInOutClick={handleSignInOutClick}
             isMobile={isMobile}
             ref={ref}
+            isActivePopup={activePopup != ''}
+            isTabletSuperNarrow={isTabletSuperNarrow}
           />
           {!isLoading && (
             <Main
@@ -175,7 +187,7 @@ function App() {
           <SignInPopup
             onCloseModal={handleClosePopup}
             onUserSignin={handleUserSignin}
-            onUserSignUp={handleUserSignup}
+            onUserSignup={handleUserSignup}
             actionText='Sign up'
             onChangeToSignUp={handleSignUpClick}
             user={currentUser}

@@ -1,22 +1,32 @@
 import { forwardRef, useState, useImperativeHandle } from 'react';
+import { useLocation } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import NavigationMobile from '../NavigationMobile/NavigationMobile';
 import BottomBoard from '../BottomBoard/BottomBoard';
 import './Header.css';
 
+// eslint-disable-next-line react/display-name
 const Header = forwardRef(function (
-  { handleShowHideNews, signedIn, handleSignInOutClick, isMobile },
+  {
+    handleShowHideNews,
+    signedIn,
+    handleSignInOutClick,
+    isActivePopup,
+    isMobile,
+    isTabletSuperNarrow,
+  },
   ref
 ) {
-  const getHeadrClassName = () => {
-    return signedIn
-      ? isMobile
-        ? 'header header_signedin header_mobile'
-        : 'header header_signedin'
-      : isMobile
-      ? expandHeader
-        ? 'header header_mobile header_mobile_expanded'
-        : 'header header_mobile'
+  const location = useLocation();
+
+  const getHeaderClassName = () => {
+    if (isMobile && isActivePopup) {
+      return 'header header_invisible';
+    }
+    return location.pathname !== '/'
+      ? 'header header_nothome'
+      : expandHeader
+      ? 'header header_expanded'
       : 'header';
   };
 
@@ -31,8 +41,10 @@ const Header = forwardRef(function (
   }));
 
   return (
-    <header className={getHeadrClassName()}>
-      <p className='header__title'>NewsExplorer</p>
+    <header className={getHeaderClassName()}>
+      <h2 className='header__title'>
+        News{signedIn && isTabletSuperNarrow ? ' ' : ''}Explorer
+      </h2>
       {!isMobile && (
         <Navigation
           onShowHideNews={handleShowHideNews}

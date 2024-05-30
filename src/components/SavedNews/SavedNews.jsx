@@ -8,7 +8,7 @@ function SavedNews({
   onChangeSavedArticles,
 }) {
   return (
-    <div className='savednews'>
+    <section className='savednews'>
       <NewsCardList
         isSavedNews={true}
         theNews={savedArticles}
@@ -18,7 +18,7 @@ function SavedNews({
         savedArticles={savedArticles}
         onChangeSavedArticles={onChangeSavedArticles}
       />
-    </div>
+    </section>
   );
 }
 

@@ -8,7 +8,7 @@
 }
 
 .search__title {
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto Slab', Arial, sans-serif;
   font-size: 60px;
   line-height: 64px;
   width: auto;
@@ -17,7 +17,7 @@
 }
 
 .search__description {
-  font-family: 'Roboto';
+  font-family: 'Roboto', Arial, sans-serif;
   font-size: 18px;
   line-height: 24px;
   text-align: left;
@@ -39,7 +39,7 @@
 }
 
 .search__topic {
-  font-family: Roboto;
+  font-family: Roboto, Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
@@ -84,6 +84,10 @@ input[type='search']::-webkit-search-results-decoration {
 
 .search__button:hover {
   background: #347eff;
+}
+
+.search__button:active {
+  background: #2a65cc;
 }
 
 @media screen and (min-width: 321px) and (max-width: 768px) {
@@ -161,7 +165,7 @@ input[type='search']::-webkit-search-results-decoration {
   }
 
   .search__topic {
-    font-family: Roboto;
+    font-family: Roboto, Arial, sans-serif;
     text-align: left;
     width: 256px;
     flex-basis: auto;

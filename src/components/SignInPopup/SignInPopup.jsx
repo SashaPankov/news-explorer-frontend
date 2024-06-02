@@ -55,64 +55,71 @@ const SignInPopup = ({
       isSubmitDisabled={submitDisabled}
       isMobile={isMobile}
     >
-      <label className='popup__label'>
+      <label className='popup__label' htmlFor='user-email'>
         Email
-        <input
-          type='email'
-          name='email'
-          id='user-email'
-          className='popup__input'
-          placeholder='Enter email'
-          required
-          value={values.email || ''}
-          onChange={handleChange}
-          ref={emailInputRef}
-        />
-        <span className='popup__error' id='user-email-error'>
-          {!validities['email']?.valid &&
-            emailInputRef.current &&
-            'Invalid email address'}
-        </span>
       </label>
-      <label className='popup__label'>
+      <input
+        type='email'
+        name='email'
+        id='user-email'
+        className='popup__input'
+        placeholder='Enter email'
+        required
+        value={values.email || ''}
+        onChange={handleChange}
+        ref={emailInputRef}
+      />
+      <span className='popup__line'></span>
+      <span className='popup__error' id='user-email-error'>
+        {!validities['email']?.valid &&
+          emailInputRef.current &&
+          'Invalid email address'}
+      </span>
+      <label className='popup__label' htmlFor='user-password'>
         Password
-        <input
-          type='password'
-          name='password'
-          id='user-password'
-          className='popup__input'
-          placeholder='Enter password'
-          required
-          value={values.password || ''}
-          onChange={handleChange}
-          ref={passwordInputRef}
-        />
-        <span className='popup__error' id='user-password-error'>
-          {validities['password'] &&
-            !validities['password']?.valid &&
-            passwordInputRef.current?.validationMessage}
-        </span>
       </label>
+      <input
+        type='password'
+        name='password'
+        id='user-password'
+        className='popup__input'
+        placeholder='Enter password'
+        required
+        value={values.password || ''}
+        onChange={handleChange}
+        ref={passwordInputRef}
+      />
+      <span className='popup__line'></span>
+      <span className='popup__error' id='user-password-error'>
+        {validities['password'] &&
+          !validities['password']?.valid &&
+          passwordInputRef.current?.validationMessage}
+      </span>
       {isSignUp && (
-        <label className='popup__label'>
+        <label className='popup__label' htmlFor='user-name'>
           Username
-          <input
-            type='text'
-            name='userName'
-            id='user-name'
-            className='popup__input'
-            placeholder='Enter your username'
-            required
-            value={values.userName || ''}
-            onChange={handleChange}
-            ref={userNameInputRef}
-          />
-          <span className='popup__error' id='user-password-error'>
-            {validities['userName'] &&
-              !validities['userName']?.valid &&
-              userNameInputRef.current?.validationMessage}
-          </span>
         </label>
+      )}
+      {isSignUp && (
+        <input
+          type='text'
+          name='userName'
+          id='user-name'
+          className='popup__input'
+          placeholder='Enter your username'
+          required
+          value={values.userName || ''}
+          onChange={handleChange}
+          ref={userNameInputRef}
+        />
+      )}
+      {isSignUp && <span className='popup__line'></span>}
+      {isSignUp && (
+        <span className='popup__error' id='user-password-error'>
+          {validities['userName'] &&
+            !validities['userName']?.valid &&
+            userNameInputRef.current?.validationMessage}
+        </span>
       )}
     </PopupWithForm>
   );

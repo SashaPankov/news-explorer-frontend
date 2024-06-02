@@ -83,6 +83,7 @@ const BottomBoard = ({
           <img
             className='bottomboard__signout'
             src={!isHomePage() ? logoutImg : logoutImgWhite}
+            alt='Sign out'
           />
         )}
       </button>

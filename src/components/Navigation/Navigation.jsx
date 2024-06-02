@@ -43,6 +43,7 @@ function Navigation({ onShowHideNews, signedIn = false, onSignInOutClick }) {
         <button
           className={
             getButtonClassName('/') +
+            ' navigation__button_home' +
             (!signedIn ? ' navigation__button_notsigned' : '')
           }
           onClick={() => {
@@ -54,7 +55,10 @@ function Navigation({ onShowHideNews, signedIn = false, onSignInOutClick }) {
         </button>
         {signedIn && (
           <button
-            className={getButtonClassName('/savednews')}
+            className={
+              getButtonClassName('/savednews') +
+              ' navigation__button_saved-articles'
+            }
             onClick={() => {
               onShowHideNews(false);
               navigate('/savednews');
@@ -87,6 +91,7 @@ function Navigation({ onShowHideNews, signedIn = false, onSignInOutClick }) {
           <img
             className='navigation__signout'
             src={!isHomePage() ? logoutImg : logoutImgWhite}
+            alt='Sign out'
           />
         )}
       </button>

@@ -10,6 +10,7 @@
   --width_vsb: calc(100vw - 100%);
   --padright: calc(7.2222vw - (var(--width_vsb)));
   padding: 0 var(--padright) 0 7.2222vw;
+  margin-top: var(--width_vsb);
 }
 
 .header_invisible {
@@ -27,7 +28,7 @@
 .header__title {
   font-size: 20px;
   line-height: 24px;
-  font-family: 'Roboto Slab 700';
+  font-family: 'Roboto Slab 700', Arial, sans-serif;
 }
 
 @media screen and (min-width: 321px) and (max-width: 768px) {
@@ -46,10 +47,18 @@
   .header {
     height: auto;
     justify-content: space-between;
-    padding: 16px;
+    padding: 16px 16px 15px;
+    background: #c4c4c403;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .header_nothome {
+    border-bottom: 1px solid rgba(209, 210, 214, 1);
   }
 
   .header__title {
     margin: 0;
+    font-size: 16px;
+    line-height: 24px;
   }
 }

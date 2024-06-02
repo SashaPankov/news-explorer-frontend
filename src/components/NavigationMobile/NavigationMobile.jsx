@@ -32,6 +32,7 @@ function NavigationMobile({ headerExpanded = false, onHeaderExpandClick }) {
                 ? menuIcon
                 : menuIconBlack
             }
+            alt={headerExpanded ? 'Close menu' : 'Show menu'}
           />
         }
       </button>

@@ -25,7 +25,7 @@
   background-color: transparent;
   cursor: pointer;
   color: #ffffff;
-  font-family: 'Roboto 500';
+  font-family: 'Roboto 500', Arial, sans-serif;
   font-size: 18px;
   line-height: 56px;
   text-align: left;
@@ -33,6 +33,11 @@
 
 .bottomboard__button_nothome {
   color: #1a1b22;
+  border-bottom: 1px solid transparent;
+}
+
+.bottomboard__button_active {
+  border-bottom: 1px solid #ffffff;
 }
 
 .bottomboard__button_nothome_active {

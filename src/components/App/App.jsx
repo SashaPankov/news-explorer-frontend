@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useMediaQuery } from '@react-hook/media-query';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -28,17 +28,41 @@ function App() {
   const isNarrow = useMediaQuery(
     'only screen and (min-width: 831px) and (max-width: 1246px)'
   );
+  const isBadInterval = useMediaQuery(
+    'only screen and (min-width: 1232px) and (max-width: 1245px)'
+  );
+  const isDesktop = useMediaQuery('only screen and (min-width: 1246px)');
+  const isDesktop1700 = useMediaQuery('only screen and (min-width: 1700px)');
 
-  const newsInARow =
-    isMobile || isSuperNarrow || isTabletSuperNarrow
-      ? 1
+  const noVSB = document.body.clientWidth === window.innerWidth;
+
+  const getNewsInARow = () => {
+    return isDesktop1700
+      ? 4
+      : isDesktop
+      ? 3
       : isNarrow || isTabletNarrow
-      ? 2
+      ? noVSB && isBadInterval
+        ? 3
+        : 2
+      : isSuperNarrow || isTabletSuperNarrow || isMobile
+      ? 1
+      : 1;
+  };
+
+  const getNewsDelta = () => {
+    return isDesktop1700
+      ? 4
+      : isNarrow || isTabletNarrow
+      ? noVSB && isBadInterval
+        ? 3
+        : 2
       : 3;
-  const moreNewsDelta = isNarrow || isTabletNarrow ? 2 : 3;
+  };
 
   const [newsSection, setNewsSection] = useState({ visible: false, topic: '' });
-  const [visibleNews, setvisibleNews] = useState(isNarrow ? 2 : 3);
+  const visibleNewsCount = useRef(isNarrow ? (isBadInterval ? 3 : 2) : 3);
+  const [visibleNews, setvisibleNews] = useState(visibleNewsCount.current);
   const [activePopup, setActivePopup] = useState('');
   const [articles, setArticles] = useState([]);
   const [savedArticles, setSavedArticles] = useState([]);
@@ -49,6 +73,149 @@ function App() {
 
   const navigate = useNavigate();
   const ref = useRef();
+
+  const [newsParams, setNewsParams] = useState({
+    newsInARow: getNewsInARow(),
+    moreNewsDelta: getNewsDelta(),
+  });
+
+  useEffect(() => {
+    const initScrollbarWidthEvent = () => {
+      const scrollbarEvent = new Event('scrollbar-width');
+      let currentWidth = window.innerWidth - document.body.clientWidth;
+
+      const observer = new ResizeObserver(() => {
+        const newWidth = window.innerWidth - document.body.clientWidth;
+
+        if (newWidth !== currentWidth) {
+          scrollbarEvent.detail = {
+            previous: currentWidth,
+            current: newWidth,
+          };
+          currentWidth = newWidth;
+          window.dispatchEvent(scrollbarEvent);
+        }
+      });
+
+      observer.observe(document.body);
+    };
+    initScrollbarWidthEvent();
+
+    function updateParams(event) {
+      let noVSB;
+      if (event) {
+        if (event.type === 'scrollbar-width') {
+          noVSB = event.detail.current === 0;
+        } else {
+          noVSB = window.innerWidth === document.body.clientWidth;
+        }
+      }
+
+      // const noVSB = document.body.clientWidth === window.innerWidth;
+
+      const checkMedia = (query) => {
+        return window.matchMedia(query).matches;
+      };
+
+      const isMobile = checkMedia('only screen and (max-width: 320px)');
+      const isTabletSuperNarrow = checkMedia(
+        'only screen and (min-width: 321px) and (max-width: 470px)'
+      );
+      const isTabletNarrow = checkMedia(
+        'only screen and (min-width: 471px) and (max-width: 767px)'
+      );
+      const isTablet = checkMedia(
+        'only screen and (min-width: 768px) and (max-width: 768px)'
+      );
+      const isSuperNarrow = checkMedia(
+        'only screen and (min-width: 769px) and (max-width: 830px)'
+      );
+      const isNarrow = checkMedia(
+        'only screen and (min-width: 831px) and (max-width: 1246px)'
+      );
+      const isBadInterval = checkMedia(
+        'only screen and (min-width: 1232px) and (max-width: 1245px)'
+      );
+      const isDesktop = checkMedia(
+        'only screen and (min-width: 1246px) and (max-width: 1699px)'
+      );
+      const isDesktop1700 = checkMedia(
+        'only screen and (min-width: 1700px) and (max-width: 2099px)'
+      );
+      const isDesktop2100 = checkMedia(
+        'only screen and (min-width: 2100px) and (max-width: 2494px)'
+      );
+      const isDesktop2600 = checkMedia(
+        'only screen and (min-width: 2495px) and (max-width: 2999px)'
+      );
+      const isDesktop3000 = checkMedia('only screen and (min-width: 3000px)');
+
+      const getNewsInARow = () => {
+        return isDesktop3000
+          ? 7
+          : isDesktop2600
+          ? 6
+          : isDesktop2100
+          ? 5
+          : isDesktop1700
+          ? 4
+          : isDesktop || isTablet
+          ? 3
+          : isNarrow || isTabletNarrow
+          ? noVSB && isBadInterval
+            ? 3
+            : 2
+          : isSuperNarrow || isTabletSuperNarrow || isMobile
+          ? 1
+          : 1;
+      };
+
+      const newsInARow_ = getNewsInARow();
+
+      const getNewsDelta = () => {
+        return isDesktop3000
+          ? 7
+          : isDesktop2600
+          ? 6
+          : isDesktop2100
+          ? 5
+          : isDesktop1700
+          ? 4
+          : isNarrow || isTabletNarrow
+          ? noVSB && isBadInterval
+            ? 3
+            : 2
+          : 3;
+      };
+
+      const moreNewsDelta_ = getNewsDelta();
+
+      setNewsParams({ newsInARow: newsInARow_, moreNewsDelta: moreNewsDelta_ });
+
+      if (!newsSection.visible) {
+        let newVisibleNews = visibleNewsCount.current;
+
+        if (visibleNewsCount.current % moreNewsDelta_ > 0) {
+          newVisibleNews =
+            visibleNewsCount.current +
+            moreNewsDelta_ -
+            (visibleNewsCount.current % moreNewsDelta_);
+        }
+
+        visibleNewsCount.current = newVisibleNews;
+        setvisibleNews(newVisibleNews);
+      }
+    }
+
+    updateParams();
+
+    window.addEventListener('scrollbar-width', updateParams);
+    window.addEventListener('resize', updateParams);
+    return () => {
+      window.removeEventListener('scrollbar-width', updateParams);
+      window.removeEventListener('resize', updateParams);
+    };
+  }, [newsSection.visible]);
 
   function handleShowHideNews(newsVisible) {
     setNewsSection({
@@ -73,17 +240,18 @@ function App() {
       visible: !(searchTopic === ''),
       topic: searchTopic,
     });
-    if (!newsSection.visible) {
-      setvisibleNews(moreNewsDelta);
-    }
+    visibleNewsCount.current = newsParams.moreNewsDelta;
+    setvisibleNews(newsParams.moreNewsDelta);
   }
 
   const handleShowMoreNews = () => {
-    setvisibleNews(
-      visibleNews + moreNewsDelta > articles.length
+    const newVisibleNewsCount =
+      visibleNewsCount.current + newsParams.moreNewsDelta > articles.length
         ? articles.length
-        : visibleNews + moreNewsDelta
-    );
+        : visibleNewsCount.current + newsParams.moreNewsDelta;
+
+    visibleNewsCount.current = newVisibleNewsCount;
+    setvisibleNews(newVisibleNewsCount);
   };
 
   const handleUserSignin = (userSigninData) => {
@@ -155,7 +323,7 @@ function App() {
               handleHideNews={handleShowHideNews}
               handleTopicSearch={handleTopicSearch}
               searchTopic={newsSection.topic}
-              newsInARow={newsInARow}
+              newsInARow={newsParams.newsInARow}
               isMobile={isMobile}
               signedIn={signedIn}
               savedArticlesCount={savedArticles.length}
@@ -168,7 +336,7 @@ function App() {
             theNews={articles}
             onShowMoreNews={handleShowMoreNews}
             visibleNews={visibleNews}
-            newsInARow={newsInARow}
+            newsInARow={newsParams.newsInARow}
             isMobile={isMobile}
             onChangeSavedArticles={handleChangeSavedArticles}
             savedArticles={savedArticles}
@@ -176,7 +344,7 @@ function App() {
         )}
         {location.pathname === '/savednews' && (
           <SavedNews
-            newsInARow={newsInARow}
+            newsInARow={newsParams.newsInARow}
             savedArticles={savedArticles}
             onChangeSavedArticles={handleChangeSavedArticles}
           />

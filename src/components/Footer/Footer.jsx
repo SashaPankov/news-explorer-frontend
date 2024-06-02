@@ -3,9 +3,6 @@ import './Footer.css';
 import faceBookLogo from '../../assets/fb.svg';
 import gitHubLogo from '../../assets/github.svg';
 
-const navClassName = ({ isActive }) =>
-  'footer__ref' + (isActive ? ' footer__ref_active' : '');
-
 function Footer({ isMobile = false }) {
   return (
     <footer className='footer'>
@@ -24,7 +21,7 @@ function Footer({ isMobile = false }) {
       <div className='footer__links-wrapper'>
         <ul className='footer__links'>
           <li className='footer__link'>
-            <NavLink to='/' className={navClassName}>
+            <NavLink to='/' className='footer__ref'>
               Home
             </NavLink>
           </li>
@@ -39,15 +36,15 @@ function Footer({ isMobile = false }) {
           </li>
         </ul>
         <div className='footer__logos-wrapper'>
-          <div className='footer__github'>
+          <div className='footer__logo footer__github'>
             <a
               href='https://github.com/SashaPankov/news-explorer-frontend'
               target='_blank'
             >
-              <img src={gitHubLogo} alt='Facebook icon' />
+              <img src={gitHubLogo} alt='Github icon' />
             </a>
           </div>
-          <div className='footer__social'>
+          <div className='footer__logo footer__social'>
             <a href='https://www.facebook.com' target='_blank'>
               <img src={faceBookLogo} alt='Facebook icon' />
             </a>

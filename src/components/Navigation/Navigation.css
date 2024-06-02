@@ -1,10 +1,10 @@
 .navigation {
   display: flex;
   font-size: 18px;
-  font-family: 'Roboto 500';
+  font-family: 'Roboto 500', Arial, sans-serif;
   line-height: 24px;
   background-color: transparent;
-  gap: 2.9167vw;
+  gap: 2.2222vw;
   height: inherit;
   justify-content: space-around;
 }
@@ -15,6 +15,7 @@
 
 .navigation__buttonswrapper {
   display: flex;
+  gap: 3.0556vw;
 }
 
 .navigation__button {
@@ -22,7 +23,8 @@
   background-color: transparent;
   cursor: pointer;
   color: #ffffff;
-  border-bottom: 1px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-top: 3px solid transparent;
 }
 
 .navigation__button_nothome {
@@ -30,11 +32,19 @@
 }
 
 .navigation__button_active {
-  border-bottom: 1px solid #ffffff;
+  border-bottom: 3px solid #ffffff;
 }
 
 .navigation__button_nothome_active {
-  border-bottom: 1px solid #1a1b22;
+  border-bottom: 3px solid #1a1b22;
+}
+
+.navigation__button_home {
+  width: 4.7222vw;
+}
+
+.navigation__button_saved-articles {
+  width: 12.3611vw;
 }
 
 .navigation__button-signin {
@@ -91,6 +101,15 @@
     gap: 2.1vw;
   }
 
+  .navigation__button_home {
+    width: 8.3333vw;
+    min-width: 66.86px;
+  }
+
+  .navigation__button_saved-articles {
+    width: 20.8333vw;
+  }
+
   .navigation__button-signin {
     padding: 8px 12px;
     height: 40px;
@@ -111,11 +130,23 @@
   }
 }
 
+@media screen and (max-width: 382px) {
+  .navigation__button-signin_signed_in {
+    padding-left: 11px;
+    padding-right: 10px;
+  }
+}
+
 @media screen and (max-width: 373px) {
   .navigation__buttonswrapper {
     flex-direction: column;
     justify-content: end;
     gap: unset;
+    align-items: center;
+  }
+
+  .navigation__buttonswrapper {
+    align-items: center;
   }
 
   .navigation__buttonswrapper_signed_in {

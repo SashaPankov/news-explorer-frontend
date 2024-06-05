@@ -32,14 +32,11 @@ function App() {
     'only screen and (min-width: 1232px) and (max-width: 1245px)'
   );
   const isDesktop = useMediaQuery('only screen and (min-width: 1246px)');
-  const isDesktop1700 = useMediaQuery('only screen and (min-width: 1700px)');
 
   const noVSB = document.body.clientWidth === window.innerWidth;
 
   const getNewsInARow = () => {
-    return isDesktop1700
-      ? 4
-      : isDesktop
+    return isDesktop
       ? 3
       : isNarrow || isTabletNarrow
       ? noVSB && isBadInterval
@@ -51,13 +48,7 @@ function App() {
   };
 
   const getNewsDelta = () => {
-    return isDesktop1700
-      ? 4
-      : isNarrow || isTabletNarrow
-      ? noVSB && isBadInterval
-        ? 3
-        : 2
-      : 3;
+    return isNarrow || isTabletNarrow ? (noVSB && isBadInterval ? 3 : 2) : 3;
   };
 
   const [newsSection, setNewsSection] = useState({ visible: false, topic: '' });
@@ -111,8 +102,6 @@ function App() {
         }
       }
 
-      // const noVSB = document.body.clientWidth === window.innerWidth;
-
       const checkMedia = (query) => {
         return window.matchMedia(query).matches;
       };
@@ -133,33 +122,13 @@ function App() {
       const isNarrow = checkMedia(
         'only screen and (min-width: 831px) and (max-width: 1246px)'
       );
+      const isDesktop = checkMedia('only screen and (min-width: 1246px)');
       const isBadInterval = checkMedia(
         'only screen and (min-width: 1232px) and (max-width: 1245px)'
       );
-      const isDesktop = checkMedia(
-        'only screen and (min-width: 1246px) and (max-width: 1699px)'
-      );
-      const isDesktop1700 = checkMedia(
-        'only screen and (min-width: 1700px) and (max-width: 2099px)'
-      );
-      const isDesktop2100 = checkMedia(
-        'only screen and (min-width: 2100px) and (max-width: 2494px)'
-      );
-      const isDesktop2600 = checkMedia(
-        'only screen and (min-width: 2495px) and (max-width: 2999px)'
-      );
-      const isDesktop3000 = checkMedia('only screen and (min-width: 3000px)');
 
       const getNewsInARow = () => {
-        return isDesktop3000
-          ? 7
-          : isDesktop2600
-          ? 6
-          : isDesktop2100
-          ? 5
-          : isDesktop1700
-          ? 4
-          : isDesktop || isTablet
+        return isDesktop || isTablet
           ? 3
           : isNarrow || isTabletNarrow
           ? noVSB && isBadInterval
@@ -173,15 +142,7 @@ function App() {
       const newsInARow_ = getNewsInARow();
 
       const getNewsDelta = () => {
-        return isDesktop3000
-          ? 7
-          : isDesktop2600
-          ? 6
-          : isDesktop2100
-          ? 5
-          : isDesktop1700
-          ? 4
-          : isNarrow || isTabletNarrow
+        return isNarrow || isTabletNarrow
           ? noVSB && isBadInterval
             ? 3
             : 2
@@ -225,21 +186,37 @@ function App() {
     ref.current.setState();
   }
 
+  const [nothingFound, setNothingFound] = useState(false);
+  const [searchError, setSearchError] = useState(false);
+
   function handleTopicSearch(searchTopic) {
+    let somethingFound = false;
+    let searchError = false;
     if (searchTopic) {
+      setNothingFound(false);
       setIsLoading(true);
       getNewsByKeyword(searchTopic)
         .then((data) => {
           setArticles(data.articles);
+          somethingFound = data.articles.length > 0;
         })
-        .catch(console.error)
-        .finally(() => setIsLoading(false));
+        .catch(() => {
+          console.error;
+          searchError = true;
+        })
+        .finally(() => {
+          setNewsSection({
+            ...newsSection,
+            visible: somethingFound, //!(searchTopic === ''),
+            topic: searchTopic,
+          });
+          setNothingFound(!somethingFound);
+          setSearchError(searchError);
+          setIsLoading(false);
+        });
+    } else {
+      window.alert('Please enter a keyword');
     }
-    setNewsSection({
-      ...newsSection,
-      visible: !(searchTopic === ''),
-      topic: searchTopic,
-    });
     visibleNewsCount.current = newsParams.moreNewsDelta;
     setvisibleNews(newsParams.moreNewsDelta);
   }
@@ -318,17 +295,17 @@ function App() {
             isActivePopup={activePopup != ''}
             isTabletSuperNarrow={isTabletSuperNarrow}
           />
-          {!isLoading && (
-            <Main
-              handleHideNews={handleShowHideNews}
-              handleTopicSearch={handleTopicSearch}
-              searchTopic={newsSection.topic}
-              newsInARow={newsParams.newsInARow}
-              isMobile={isMobile}
-              signedIn={signedIn}
-              savedArticlesCount={savedArticles.length}
-            />
-          )}
+          {/* {!isLoading && ( */}
+          <Main
+            handleHideNews={handleShowHideNews}
+            handleTopicSearch={handleTopicSearch}
+            searchTopic={newsSection.topic}
+            newsInARow={newsParams.newsInARow}
+            isMobile={isMobile}
+            signedIn={signedIn}
+            savedArticlesCount={savedArticles.length}
+          />
+          {/* )} */}
         </div>
         {isLoading && <Preloader />}
         {newsSection.visible && (
@@ -340,7 +317,14 @@ function App() {
             isMobile={isMobile}
             onChangeSavedArticles={handleChangeSavedArticles}
             savedArticles={savedArticles}
+            signedIn={signedIn}
           />
+        )}
+        {location.pathname === '/' && nothingFound && (
+          <Preloader nothingFound={nothingFound} />
+        )}
+        {location.pathname === '/' && searchError && (
+          <Preloader searchError={searchError} />
         )}
         {location.pathname === '/savednews' && (
           <SavedNews

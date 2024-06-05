@@ -7,6 +7,7 @@ function NewsCard({
   isCardSaved,
   isSavedView,
   isSavedNews = false,
+  signedIn = false,
 }) {
   const [cardSaved, setCardSaved] = useState(isCardSaved);
 
@@ -16,6 +17,23 @@ function NewsCard({
       setCardSaved(!cardSaved);
     }
   };
+
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
+  const datePublished = new Date(card.publishedAt);
 
   return (
     <li className={card.title ? 'newscard' : 'newscard newscard_transparent'}>
@@ -29,16 +47,19 @@ function NewsCard({
             : 'newscard__mark'
         }
         onClick={handleMarkChange}
+        disabled={!signedIn}
       ></button>
+      {!signedIn && (
+        <span className='newscard__mark-tooltip'>Sign in to save articles</span>
+      )}
       <img src={card.urlToImage} alt={card.title} className='newscard__image' />
       <p className='newscard__publishedAt'>
         {card.publishedAt &&
-          new Intl.DateTimeFormat('en-GB', {
-            month: 'long',
-            day: 'numeric',
-            year: 'numeric',
-            formatMatcher: 'best fit',
-          }).format(new Date(card.publishedAt))}
+          months[datePublished.getMonth()] +
+            ' ' +
+            datePublished.getDate() +
+            ', ' +
+            datePublished.getFullYear()}
       </p>
       <h2 className='newscard__title'>{card.title}</h2>
       <p className='newscard__description'>{card.description}</p>

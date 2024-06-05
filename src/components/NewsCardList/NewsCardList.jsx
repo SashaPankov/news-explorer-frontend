@@ -10,6 +10,7 @@ function NewsCardList({
   isSavedNews = false,
   onChangeSavedArticles,
   savedArticles,
+  signedIn = false,
 }) {
   const visibleArticles = theNews.slice(0, visibleNews);
 
@@ -24,23 +25,28 @@ function NewsCardList({
   return (
     <section className='news'>
       {!isSavedNews && <p className='news__caption'>Search results</p>}
-      <ul className='news__cards'>
-        {visibleArticles.map((card, key) => (
-          <NewsCard
-            card={card}
-            key={key}
-            onChangeSavedArticles={onChangeSavedArticles}
-            isCardSaved={savedArticles.indexOf(card) !== -1}
-            isSavedView={theNews === savedArticles}
-            isSavedNews={isSavedNews}
-          />
-        ))}
-      </ul>
-      {!isSavedNews && (
-        <button className='news__showmore' onClick={handleShowMore}>
-          Show more
-        </button>
+      {visibleArticles.length > 0 && (
+        <ul className='news__cards'>
+          {visibleArticles.map((card, key) => (
+            <NewsCard
+              card={card}
+              key={key}
+              onChangeSavedArticles={onChangeSavedArticles}
+              isCardSaved={savedArticles.indexOf(card) !== -1}
+              isSavedView={theNews === savedArticles}
+              isSavedNews={isSavedNews}
+              signedIn={signedIn}
+            />
+          ))}
+        </ul>
       )}
+      {!isSavedNews &&
+        theNews.length > 0 &&
+        visibleArticles.length < theNews.length && (
+          <button className='news__showmore' onClick={handleShowMore}>
+            Show more
+          </button>
+        )}
     </section>
   );
 }

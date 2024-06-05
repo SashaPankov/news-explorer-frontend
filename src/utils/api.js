@@ -16,10 +16,12 @@ const sendRequest = async (root, options, baseUrl = backEndUrl) => {
 };
 
 const getNewsByKeyword = (keyword) => {
+  const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+  const today = new Date(Date.now());
   return sendRequest(
     '',
     {},
-    `${newsApiURL}/everything?q=${keyword}&apiKey=${apiKey}`
+    `${newsApiURL}/everything?q=${keyword}&apiKey=${apiKey}&from=${sevenDaysAgo.toISOString()}&to=${today.toISOString()}&pageSize=100`
   );
 };
 

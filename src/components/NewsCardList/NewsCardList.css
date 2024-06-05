@@ -26,6 +26,7 @@
   overflow: hidden;
   justify-content: center;
   margin: 62px auto;
+  max-width: 1232px;
 }
 
 .news__showmore {

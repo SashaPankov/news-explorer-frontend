@@ -9,7 +9,6 @@ function Main({
   handleTopicSearch,
   searchTopic,
   isMobile,
-  newsInARow,
   signedIn,
   savedArticlesCount,
 }) {
@@ -33,13 +32,7 @@ function Main({
           path='/savednews'
           element={
             <ProtectedRoute isSignedIn={signedIn}>
-              <SavedNewsHeader
-                onTopicSearch={handleTopicSearch}
-                searchTopic={searchTopic}
-                isMobile={isMobile}
-                newsInARow={newsInARow}
-                savedArticlesCount={savedArticlesCount}
-              />
+              <SavedNewsHeader savedArticlesCount={savedArticlesCount} />
             </ProtectedRoute>
           }
         />

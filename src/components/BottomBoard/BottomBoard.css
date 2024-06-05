@@ -1,0 +1,81 @@
+.bottomboard {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 57px;
+  left: 0;
+  background: #1a1b22;
+  align-items: start;
+  width: 288px;
+  gap: 22px;
+  padding: 16px 16px 24px;
+}
+
+.bottomboard_nothome {
+  background: #fff;
+}
+
+.bottomboard_navigation {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottomboard__button {
+  border-style: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: 'Roboto 500', Arial, sans-serif;
+  font-size: 18px;
+  line-height: 56px;
+  text-align: left;
+}
+
+.bottomboard__button_nothome {
+  color: #1a1b22;
+  border-bottom: 1px solid transparent;
+}
+
+.bottomboard__button_active {
+  border-bottom: 1px solid #ffffff;
+}
+
+.bottomboard__button_nothome_active {
+  border-bottom: 1px solid #1a1b22;
+}
+
+.bottomboard__button-sign {
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  width: 288px;
+  height: 56px;
+  border: 1px solid #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 15px;
+}
+
+.bottomboard__button-sign_in {
+  padding-left: 20px;
+  padding-right: 10px;
+  width: auto;
+  max-width: 288px;
+}
+
+.bottomboard__button-sign_nothome {
+  color: #1a1b22;
+  border: 1px solid #1a1b22;
+  background-color: transparent;
+}
+
+.bottomboard__username {
+  max-width: 152px;
+}
+
+.navigation__username_signed_in {
+  width: auto;
+}

@@ -1,0 +1,9 @@
+.asterisk::after {
+  content: '*';
+  display: inline;
+}
+
+.popup__label_required::after {
+  content: '*';
+  display: inline;
+}

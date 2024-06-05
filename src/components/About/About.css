@@ -1,0 +1,123 @@
+.about {
+  display: flex;
+  margin: 0;
+  --width_vsb: calc(100vw - 100%);
+  --padright: calc(15vw - (var(--width_vsb)));
+  padding: 80px var(--padright) 61px 7.2222vw;
+  justify-content: space-between;
+}
+
+.about__imagewrapper {
+  width: 32.2222vw;
+}
+
+.about__card {
+  width: 41.6667vw;
+}
+
+.about__image {
+  width: 100%;
+  aspect-ratio: 1/1;
+  display: block;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.about__title {
+  font-family: 'Roboto Slab', Arial, sans-serif;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 46px;
+  text-align: left;
+  padding-top: 50px;
+  margin: 0;
+}
+
+.about__description {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  width: auto;
+  opacity: 1;
+  margin-top: 24px;
+}
+
+.about__reactLogo {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.about__reactTitle {
+  margin-left: 5px;
+}
+
+@media screen and (min-width: 321px) and (max-width: 768px) {
+  .about {
+    margin: 0;
+    --width_vsb: calc(100vw - 100%);
+    --padright: calc(5.2083vw - (var(--width_vsb)));
+    padding: 40px var(--padright) 61px 5.2083vw;
+  }
+
+  .about__imagewrapper {
+    width: 30.2083vw;
+  }
+
+  .about__image {
+    margin: 21px 0 0;
+  }
+
+  .about__card {
+    width: 55.2083vw;
+  }
+
+  .about__title {
+    font-size: 30px;
+    line-height: 40px;
+    margin: 0 auto 16px;
+    padding-top: 0;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .about {
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 0 128px;
+    gap: 24px;
+  }
+
+  .about__imagewrapper {
+    width: 85vw;
+  }
+
+  .about__image {
+    width: 272px;
+    height: 272px;
+    margin: 0;
+  }
+
+  .about__card {
+    display: flex;
+    flex-direction: column;
+    padding: 0 16px;
+    width: auto;
+    gap: 16px;
+  }
+
+  .about__title {
+    font-size: 30px;
+    line-height: 40px;
+    width: 288px;
+    padding: 0;
+  }
+
+  .about__description {
+    width: 288px;
+    margin: 0;
+  }
+}

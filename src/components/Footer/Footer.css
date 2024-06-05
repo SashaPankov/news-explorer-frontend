@@ -1,0 +1,118 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  --width_vsb: calc(100vw - 100%);
+  --padright: calc(7.2222vw - (var(--width_vsb)));
+  padding: 0 var(--padright) 0 7.2222vw;
+  height: 80px;
+}
+
+.footer__copyright {
+  color: #b6bcbf;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+}
+
+.footer__links-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2.7778vw;
+  padding: 0;
+}
+
+.footer__links {
+  margin: 0;
+  list-style: none;
+  display: flex;
+  gap: 2.7778vw;
+  padding: 0;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.footer__logos-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.6667vw;
+}
+
+.footer__ref {
+  color: rgba(26, 27, 34, 1);
+  text-decoration: none;
+}
+
+.footer__copyright > .footer__ref {
+  color: #b6bcbf;
+}
+
+@media screen and (min-width: 321px) and (max-width: 768px) {
+  .footer {
+    height: 64px;
+    --width_vsb: calc(100vw - 100%);
+    --padright: calc(5.2083vw - (var(--width_vsb)));
+    padding: 0 var(--padright) 0 5.2083vw;
+  }
+
+  .footer__links-wrapper {
+    gap: 5.2083vw;
+  }
+
+  .footer__links {
+    gap: 5.2083vw;
+  }
+
+  .footer__logos-wrapper {
+    gap: 3.125vw;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .footer {
+    flex-direction: column;
+    padding: 0;
+    height: 134px;
+    padding: 20px 16px 22px;
+  }
+
+  .footer__links-wrapper {
+    width: 288px;
+    align-items: start;
+  }
+
+  .footer__links {
+    flex-direction: column;
+    align-items: start;
+    padding: 0;
+    margin: 0;
+    height: 74px;
+    gap: 0;
+    vertical-align: top;
+    justify-content: space-between;
+  }
+
+  .footer__link {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .footer__logos-wrapper {
+    display: flex;
+    width: 72px;
+    gap: unset;
+    justify-content: space-between;
+  }
+
+  .footer__copyright {
+    width: 288px;
+  }
+
+  .footer__logo {
+    height: 24px;
+  }
+}

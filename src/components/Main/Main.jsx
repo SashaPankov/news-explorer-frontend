@@ -11,6 +11,7 @@ function Main({
   isMobile,
   signedIn,
   savedArticlesCount,
+  savedArticles,
 }) {
   return (
     <main className='main'>
@@ -32,7 +33,10 @@ function Main({
           path='/savednews'
           element={
             <ProtectedRoute isSignedIn={signedIn}>
-              <SavedNewsHeader savedArticlesCount={savedArticlesCount} />
+              <SavedNewsHeader
+                savedArticlesCount={savedArticlesCount}
+                savedArticles={savedArticles}
+              />
             </ProtectedRoute>
           }
         />

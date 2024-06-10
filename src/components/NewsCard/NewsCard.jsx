@@ -1,20 +1,18 @@
-import { useState } from 'react';
 import './NewsCard.css';
 
 function NewsCard({
   card,
   onChangeSavedArticles,
   isCardSaved,
-  isSavedView,
   isSavedNews = false,
   signedIn = false,
+  onSignIn,
 }) {
-  const [cardSaved, setCardSaved] = useState(isCardSaved);
-
   const handleMarkChange = () => {
-    onChangeSavedArticles(card, !cardSaved);
-    if (!isSavedView) {
-      setCardSaved(!cardSaved);
+    if (!signedIn) {
+      onSignIn();
+    } else {
+      onChangeSavedArticles(card, !isCardSaved);
     }
   };
 
@@ -35,22 +33,29 @@ function NewsCard({
 
   const datePublished = new Date(card.publishedAt);
 
+  console.log();
+
   return (
     <li className={card.title ? 'newscard' : 'newscard newscard_transparent'}>
-      <p className='newscard__keyword'>Keyword</p>
+      <p className='newscard__keyword'>{card.keyword}</p>
       <button
         className={
-          cardSaved
+          isCardSaved
             ? !isSavedNews
               ? 'newscard__mark newscard__marked'
               : 'newscard__mark newscard__trash'
             : 'newscard__mark'
         }
         onClick={handleMarkChange}
-        disabled={!signedIn}
+        // disabled={!signedIn}
       ></button>
       {!signedIn && (
         <span className='newscard__mark-tooltip'>Sign in to save articles</span>
+      )}
+      {isSavedNews && (
+        <span className='newscard__mark-tooltip newscard__mark-tooltip_saved'>
+          Remove from saved
+        </span>
       )}
       <img src={card.urlToImage} alt={card.title} className='newscard__image' />
       <p className='newscard__publishedAt'>

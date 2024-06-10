@@ -17,6 +17,7 @@ function SavedNews({
         isMobile={isMobile}
         savedArticles={savedArticles}
         onChangeSavedArticles={onChangeSavedArticles}
+        signedIn={true}
       />
     </section>
   );

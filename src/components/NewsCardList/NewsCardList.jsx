@@ -11,6 +11,7 @@ function NewsCardList({
   onChangeSavedArticles,
   savedArticles,
   signedIn = false,
+  onSignIn,
 }) {
   const visibleArticles = theNews.slice(0, visibleNews);
 
@@ -24,7 +25,12 @@ function NewsCardList({
 
   return (
     <section className='news'>
-      {!isSavedNews && <p className='news__caption'>Search results</p>}
+      {!isSavedNews && (
+        <p className='news__caption'>
+          Search results
+          {/* signed in = {signedIn ? 'signed' : 'not signed'} */}
+        </p>
+      )}
       {visibleArticles.length > 0 && (
         <ul className='news__cards'>
           {visibleArticles.map((card, key) => (
@@ -33,9 +39,9 @@ function NewsCardList({
               key={key}
               onChangeSavedArticles={onChangeSavedArticles}
               isCardSaved={savedArticles.indexOf(card) !== -1}
-              isSavedView={theNews === savedArticles}
               isSavedNews={isSavedNews}
               signedIn={signedIn}
+              onSignIn={onSignIn}
             />
           ))}
         </ul>

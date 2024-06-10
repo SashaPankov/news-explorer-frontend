@@ -74,7 +74,7 @@ const BottomBoard = ({
       >
         {signedIn ? (
           <span className='bottomboard__username bottomboard__username_signed_in'>
-            {currentUser.userName}
+            {currentUser.name}
           </span>
         ) : (
           <span className='bottomboard__username'>Sign in</span>

@@ -10,8 +10,15 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import NewsCardList from '../NewsCardList/NewsCardList.jsx';
 import SavedNews from '../SavedNews/SavedNews.jsx';
 import SignInPopup from '../SignInPopup/SignInPopup';
-import { getNewsByKeyword } from '../../utils/api.js';
+import RegisteredPopup from '../RegisteredPopup/RegisteredPopup';
+import {
+  getNewsByKeyword,
+  getSavedArticles,
+  saveArticle,
+  deleteArticle,
+} from '../../utils/api.js';
 import Preloader from '../Preloader/Preloader.jsx';
+import { signup, signin, getContent } from '../../utils/auth.js';
 
 function App() {
   const location = useLocation();
@@ -197,6 +204,7 @@ function App() {
       setIsLoading(true);
       getNewsByKeyword(searchTopic)
         .then((data) => {
+          data.articles.forEach((article) => (article.keyword = searchTopic));
           setArticles(data.articles);
           somethingFound = data.articles.length > 0;
         })
@@ -231,25 +239,87 @@ function App() {
     setvisibleNews(newVisibleNewsCount);
   };
 
+  function handleSubmit(request, postEvent) {
+    setIsLoading(true);
+    request()
+      .then((data) => {
+        handleClosePopup();
+        postEvent(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(err);
+      })
+      .finally(() => setIsLoading(false));
+  }
+
   const handleUserSignin = (userSigninData) => {
-    if (!Object.prototype.hasOwnProperty.call(userSigninData, 'userName')) {
-      userSigninData['userName'] = 'Elise';
-    }
-    setCurrentUser(userSigninData);
-    handleClosePopup();
-    setSignedIn(true);
-    ref.current.setState();
+    const loadSavedArticles = () => {
+      let newSavedArticles = [];
+      const fillSavedArticles = (dbArticles) => {
+        newSavedArticles = dbArticles.map((dbArticle) => ({
+          title: dbArticle.title,
+          publishedAt: dbArticle.date,
+          description: dbArticle.text,
+          source: { id: '', name: dbArticle.source },
+          urlToImage: dbArticle.image,
+          keyword: dbArticle.keyword,
+          _id: dbArticle._id,
+        }));
+      };
+
+      getSavedArticles()
+        .then((response) => {
+          fillSavedArticles(response.data);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert(err);
+        })
+        .finally(() => {
+          setSavedArticles(newSavedArticles);
+        });
+    };
+
+    const saveUser = (user) => {
+      if (user.token) {
+        localStorage.setItem('jwt', user.token);
+        getContent(user.token).then((user_1) => {
+          if (user_1) {
+            setCurrentUser(user_1.data);
+            setSignedIn(true);
+            ref.current.setState();
+            loadSavedArticles();
+            // history.push('/');
+          }
+        });
+      }
+    };
+
+    const makeRequest = () => {
+      return signin(userSigninData);
+    };
+
+    handleSubmit(makeRequest, saveUser);
   };
 
-  const handleUserSignup = () => {
-    handleClosePopup();
-    handleSignInClick();
+  const handleUserSignup = (userCredentials) => {
+    const showRegisteredPopup = () => {
+      setActivePopup('registered');
+    };
+
+    const makeRequest = () => {
+      return signup(userCredentials);
+    };
+
+    handleSubmit(makeRequest, showRegisteredPopup);
   };
 
   const handleSignInOutClick = () => {
     if (signedIn) {
       navigate('/');
       setSignedIn(false);
+      setSavedArticles([]);
       ref.current.setState();
     } else {
       setActivePopup('signin');
@@ -269,11 +339,33 @@ function App() {
   };
 
   const handleChangeSavedArticles = (card, save) => {
-    let newSavedArticles = [...savedArticles];
+    const renderCards = (article) => {
+      let newSavedArticles = [...savedArticles];
+
+      const saveArticleAtClient = () => {
+        const { _id } = article.data;
+        card._id = _id;
+        card.keyword = newsSection.topic;
+        newSavedArticles.unshift(card);
+      };
+
+      save
+        ? saveArticleAtClient()
+        : newSavedArticles.splice(newSavedArticles.indexOf(card), 1);
+      setSavedArticles(newSavedArticles);
+    };
+
+    const makeSaveRequest = () => {
+      return saveArticle(card, newsSection.topic);
+    };
+
+    const makeDeleteRequest = () => {
+      return deleteArticle(card);
+    };
+
     save
-      ? newSavedArticles.push(card)
-      : newSavedArticles.splice(newSavedArticles.indexOf(card), 1);
-    setSavedArticles(newSavedArticles);
+      ? handleSubmit(makeSaveRequest, renderCards)
+      : handleSubmit(makeDeleteRequest, renderCards);
   };
 
   return (
@@ -304,6 +396,7 @@ function App() {
             isMobile={isMobile}
             signedIn={signedIn}
             savedArticlesCount={savedArticles.length}
+            savedArticles={savedArticles}
           />
           {/* )} */}
         </div>
@@ -316,6 +409,7 @@ function App() {
             newsInARow={newsParams.newsInARow}
             isMobile={isMobile}
             onChangeSavedArticles={handleChangeSavedArticles}
+            onSignIn={handleSignInOutClick}
             savedArticles={savedArticles}
             signedIn={signedIn}
           />
@@ -356,6 +450,12 @@ function App() {
             user={currentUser}
             isSignUp={true}
             isMobile={isMobile}
+          />
+        )}
+        {activePopup === 'registered' && (
+          <RegisteredPopup
+            onCloseModal={handleClosePopup}
+            onChangeToSignIn={handleSignInClick}
           />
         )}
       </div>

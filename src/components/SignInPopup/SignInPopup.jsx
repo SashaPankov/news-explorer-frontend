@@ -31,7 +31,7 @@ const SignInPopup = ({
 
   function handleSubmit(e) {
     e.preventDefault();
-    !isSignUp ? onUserSignin(values) : onUserSignup();
+    !isSignUp ? onUserSignin(values) : onUserSignup(values);
   }
 
   function handleSignUp() {
@@ -103,12 +103,12 @@ const SignInPopup = ({
       {isSignUp && (
         <input
           type='text'
-          name='userName'
+          name='name'
           id='user-name'
           className='popup__input'
           placeholder='Enter your username'
           required
-          value={values.userName || ''}
+          value={values.name || ''}
           onChange={handleChange}
           ref={userNameInputRef}
         />
@@ -116,8 +116,8 @@ const SignInPopup = ({
       {isSignUp && <span className='popup__line'></span>}
       {isSignUp && (
         <span className='popup__error' id='user-password-error'>
-          {validities['userName'] &&
-            !validities['userName']?.valid &&
+          {validities['name'] &&
+            !validities['name']?.valid &&
             userNameInputRef.current?.validationMessage}
         </span>
       )}

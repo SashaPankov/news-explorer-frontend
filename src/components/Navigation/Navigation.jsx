@@ -82,7 +82,7 @@ function Navigation({ onShowHideNews, signedIn = false, onSignInOutClick }) {
       >
         {signedIn ? (
           <span className='navigation__username navigation__username_signed_in'>
-            {currentUser.userName}
+            {currentUser.name}
           </span>
         ) : (
           <span className='navigation__username'>Sign in</span>

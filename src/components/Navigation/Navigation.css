@@ -41,6 +41,7 @@
 
 .navigation__button_home {
   width: 4.7222vw;
+  min-width: 68px;
 }
 
 .navigation__button_saved-articles {

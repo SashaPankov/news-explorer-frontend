@@ -1,0 +1,28 @@
+.registered__title {
+  padding-top: 9px;
+  margin: 0;
+  font-family: 'Roboto 900', Arial, sans-serif;
+  font-size: 24px;
+  line-height: 28px;
+  padding-bottom: 14px;
+}
+
+.registered__signinbutton {
+  padding: 0;
+  border-style: none;
+  border-radius: none;
+  background: none;
+  color: #000;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  cursor: pointer;
+  padding-bottom: 23px;
+}
+
+.registered__signintext {
+  color: #2f71e5;
+  font-family: Inter;
+  font-size: 18px;
+  line-height: 21.78px;
+}

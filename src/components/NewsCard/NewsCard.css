@@ -11,6 +11,7 @@
 .newscard__keyword {
   position: absolute;
   width: auto;
+  max-width: 100px;
   height: 40px;
   top: 24px;
   left: 24px;
@@ -22,6 +23,9 @@
   font-family: 'Roboto 500', Arial, sans-serif;
   font-size: 14px;
   line-height: 40px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .newscard__mark {
@@ -46,21 +50,24 @@
   font-size: 12px;
   line-height: 14.06px;
   visibility: hidden;
-  width: 182px;
-  height: 40px;
+  width: auto;
+  padding: 11px 20px;
+  height: 18px;
   background-color: #fff;
   color: #000;
   text-align: center;
-  padding: 5px 0;
   border-radius: 6px;
   position: absolute;
   z-index: 1;
   top: 24px;
   right: 70px;
-  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.newscard__mark-tooltip_saved {
+  padding: 11px 26px;
 }
 
 .newscard__mark:hover + .newscard__mark-tooltip {
@@ -72,7 +79,7 @@
 }
 
 .newscard__marked:hover {
-  background-image: url('../../assets/marked.svg');
+  background-image: url('../../assets/markedhover.svg');
 }
 
 .newscard__trash {
@@ -80,7 +87,7 @@
 }
 
 .newscard__trash:hover {
-  background-image: url('../../assets/trash.svg');
+  background-image: url('../../assets/trashhover.svg');
 }
 
 .newscard__markimage {
@@ -164,11 +171,17 @@
     top: 8px;
     left: 8px;
     padding: 0 20px;
+    max-width: 110px;
   }
 
   .newscard__mark {
     top: 8px;
     right: 8px;
+  }
+
+  .newscard__mark-tooltip {
+    top: 8px;
+    right: 52px;
   }
 
   .newscard__image {
@@ -210,11 +223,17 @@
   .newscard__keyword {
     top: 16px;
     left: 16px;
+    max-width: 140px;
   }
 
   .newscard__mark {
     top: 16px;
     right: 16px;
+  }
+
+  .newscard__mark-tooltip {
+    top: 16px;
+    right: 60px;
   }
 
   .newscard__title {

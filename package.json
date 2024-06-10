@@ -1,7 +1,8 @@
 {
   "name": "news-explorer-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "homepage": "https://ne7206.twilightparadox.com",
   "type": "module",
   "scripts": {
     "dev": "vite --open",

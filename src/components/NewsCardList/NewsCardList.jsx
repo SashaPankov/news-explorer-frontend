@@ -23,8 +23,6 @@ function NewsCardList({
     onShowMoreNews();
   };
 
-  console.log(savedArticles);
-
   return (
     <section className='news'>
       {!isSavedNews && (

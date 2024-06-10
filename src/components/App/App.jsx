@@ -65,8 +65,8 @@ function App() {
   const [articles, setArticles] = useState([]);
   const [savedArticles, setSavedArticles] = useState([]);
 
-  const [currentUser, setCurrentUser] = useState({});
   const [signedIn, setSignedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -253,46 +253,49 @@ function App() {
       .finally(() => setIsLoading(false));
   }
 
-  const handleUserSignin = (userSigninData) => {
-    const loadSavedArticles = () => {
-      let newSavedArticles = [];
-      const fillSavedArticles = (dbArticles) => {
-        newSavedArticles = dbArticles.map((dbArticle) => ({
-          title: dbArticle.title,
-          publishedAt: dbArticle.date,
-          description: dbArticle.text,
-          source: { id: '', name: dbArticle.source },
-          urlToImage: dbArticle.image,
-          keyword: dbArticle.keyword,
-          _id: dbArticle._id,
-        }));
-      };
-
-      getSavedArticles()
-        .then((response) => {
-          fillSavedArticles(response.data);
-        })
-        .catch((err) => {
-          console.log(err);
-          alert(err);
-        })
-        .finally(() => {
-          setSavedArticles(newSavedArticles);
-        });
+  const loadSavedArticles = () => {
+    let newSavedArticles = [];
+    const fillSavedArticles = (dbArticles) => {
+      newSavedArticles = dbArticles.map((dbArticle) => ({
+        title: dbArticle.title,
+        publishedAt: dbArticle.date,
+        description: dbArticle.text,
+        source: { id: '', name: dbArticle.source },
+        urlToImage: dbArticle.image,
+        keyword: dbArticle.keyword,
+        _id: dbArticle._id,
+      }));
     };
 
+    getSavedArticles()
+      .then((response) => {
+        fillSavedArticles(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(err);
+      })
+      .finally(() => {
+        setSavedArticles(newSavedArticles);
+      });
+  };
+
+  const handleUserSignin = (userSigninData) => {
     const saveUser = (user) => {
       if (user.token) {
         localStorage.setItem('jwt', user.token);
-        getContent(user.token).then((user_1) => {
-          if (user_1) {
-            setCurrentUser(user_1.data);
-            setSignedIn(true);
-            ref.current.setState();
-            loadSavedArticles();
-            // history.push('/');
-          }
-        });
+        getContent(user.token)
+          .then((user_1) => {
+            if (user_1) {
+              setCurrentUser(user_1.data);
+              setSignedIn(true);
+              ref.current.setState();
+              loadSavedArticles();
+              const redirectPath = location.state?.from?.pathname || '/ducks';
+              navigate(redirectPath);
+            }
+          })
+          .catch(console.error);
       }
     };
 
@@ -317,10 +320,15 @@ function App() {
 
   const handleSignInOutClick = () => {
     if (signedIn) {
-      navigate('/');
-      setSignedIn(false);
-      setSavedArticles([]);
-      ref.current.setState();
+      const token = localStorage.getItem('jwt');
+      if (token) {
+        navigate('/');
+        localStorage.removeItem('jwt');
+        setCurrentUser({});
+        setSignedIn(false);
+        setSavedArticles([]);
+        ref.current.setState();
+      }
     } else {
       setActivePopup('signin');
     }
@@ -367,6 +375,21 @@ function App() {
       ? handleSubmit(makeSaveRequest, renderCards)
       : handleSubmit(makeDeleteRequest, renderCards);
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      getContent(token)
+        .then((user) => {
+          if (user) {
+            setCurrentUser(user.data);
+            setSignedIn(true);
+            loadSavedArticles();
+          }
+        })
+        .catch(console.error);
+    }
+  }, []);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

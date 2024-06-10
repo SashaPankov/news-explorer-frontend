@@ -1,5 +1,8 @@
 const apiKey = '17e2d2d7e28e44948305073b5755342c';
-const newsApiURL = 'https://newsapi.org/v2';
+const newsApiURL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://nomoreparties.co/news/v2'
+    : 'https://newsapi.org/v2';
 const backEndUrl =
   process.env.NODE_ENV === 'production'
     ? 'https://api.ne7206.twilightparadox.com'
